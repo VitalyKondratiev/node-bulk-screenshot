@@ -1,0 +1,6 @@
+node_modules
+.history
+
+#testable
+sitemap.xml
+*.png

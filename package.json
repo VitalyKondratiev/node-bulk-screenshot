@@ -1,0 +1,32 @@
+{
+  "name": "node-bulk-screenshot",
+  "version": "0.0.1",
+  "description": "Tool for site screenshots",
+  "main": "screenshot.js",
+  "scripts": {
+    "page2image": "page2image"
+  },
+  "author": "Vitaly Kondratiev",
+  "license": "MIT",
+  "dependencies": {
+    "cluster": "^0.7.7",
+    "moment": "^2.22.2",
+    "page2image": "^2.1.0",
+    "sync-exec": "^0.6.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VitalyKondratiev/node-bulk-screenshot.git"
+  },
+  "keywords": [
+    "node",
+    "page2image",
+    "sitemap",
+    "screenshot"
+  ],
+  "bugs": {
+    "url": "https://github.com/VitalyKondratiev/node-bulk-screenshot/issues"
+  },
+  "homepage": "https://github.com/VitalyKondratiev/node-bulk-screenshot#readme"
+}
