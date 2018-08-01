@@ -1,8 +1,8 @@
-let fs = require('fs');
-var moment = require("moment")
+const fs = require('fs');
+const moment = require("moment")
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
-let execute = require('sync-exec');
+const execute = require('sync-exec');
 const mkdirp = require('mkdirp');
 const helpers = require('./helpers.js');
 
