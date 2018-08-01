@@ -1,22 +1,16 @@
 const fs = require('fs');
-const moment = require("moment")
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 const execute = require('sync-exec');
 const mkdirp = require('mkdirp');
 const helpers = require('./helpers.js');
 
-let moment_log = function (message) {
-  let date = moment().format("DD/MM/YYYY HH:mm:ss");
-  console.log(`${date}: ${message}`);
-};
-
 if (cluster.isMaster) {
   let site_regexp = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&#\/%=~_|$?!:,.]*\)|[A-Z0-9+&#\/%=~_|$])/ig
   let screenshots_pool = [];
   let workers = [];
   let screenshots_count, executed_count = 0;
-  moment_log(`Master ${process.pid} is running`);
+  helpers.log(`Master ${process.pid} is running`);
   fs.readFile('sitemap.xml', 'utf8', function (err, contents) {
     let dbg_limit = 0;
     while (url = site_regexp.exec(contents)) {
@@ -44,14 +38,14 @@ if (cluster.isMaster) {
     }
     cluster.on('message', (worker, message, handle) => {
       executed_count++;
-      moment_log(`${message} (${executed_count}/${screenshots_count})`);
+      helpers.log(`${message} (${executed_count}/${screenshots_count})`);
     });
     cluster.on('exit', (worker, code, signal) => {
-      moment_log(`Worker ${worker.process.pid} died`);
+      helpers.log(`Worker ${worker.process.pid} died`);
     });
   });
 } else {
-  moment_log(`Worker ${process.pid} started`);
+  helpers.log(`Worker ${process.pid} started`);
   process.on('message', function (message) {
     let {dirname, filename} = helpers.get_names_from_url(message);
     mkdirp(dirname);

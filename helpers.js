@@ -1,3 +1,5 @@
+const moment = require("moment");
+
 let helpers = {
   get_names_from_url: function (url) {
     let filename = url;
@@ -17,6 +19,10 @@ let helpers = {
     }
     let dirname = exploded_filename.join('/');
     return { 'dirname': dirname, 'filename': filename }
+  },
+  log: function (message) {
+    let date = moment().format("DD/MM/YYYY HH:mm:ss");
+    console.log(`${date}: ${message}`);
   }
 }
 
