@@ -1,6 +1,6 @@
 {
   "name": "node-bulk-screenshot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Tool for site screenshots",
   "main": "screenshot.js",
   "scripts": {
@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "cluster": "^0.7.7",
+    "mkdirp": "^0.5.1",
     "moment": "^2.22.2",
     "page2image": "^2.1.0",
     "sync-exec": "^0.6.2"

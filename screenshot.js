@@ -3,6 +3,8 @@ var moment = require("moment")
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 let execute = require('sync-exec');
+const mkdirp = require('mkdirp');
+const helpers = require('./helpers.js');
 
 let moment_log = function (message) {
   let date = moment().format("DD/MM/YYYY HH:mm:ss");
@@ -51,7 +53,9 @@ if (cluster.isMaster) {
 } else {
   moment_log(`Worker ${process.pid} started`);
   process.on('message', function (message) {
-    let ex = execute(`npm run page2image -- ${message}`);
+    let {dirname, filename} = helpers.get_names_from_url(message);
+    mkdirp(dirname);
+    let ex = execute(`npm run page2image -- ${message} --named="${dirname}/${filename}"`);
     let ex_output = /(save.*?)$/msg.exec(ex.stdout)[0];
     process.send(`Worker ${process.pid} ${ex_output}`);
   });
