@@ -1,0 +1,5 @@
+{
+  "blacklist_urls": [
+    "^http://www.sitemaps.org/schemas/.*$"
+  ]
+}

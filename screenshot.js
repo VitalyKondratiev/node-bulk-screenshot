@@ -4,6 +4,7 @@ const numCPUs = require('os').cpus().length;
 const execute = require('sync-exec');
 const mkdirp = require('mkdirp');
 const helpers = require('./helpers.js');
+const config = require('./config.json');
 
 if (cluster.isMaster) {
   let site_regexp = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&#\/%=~_|$?!:,.]*\)|[A-Z0-9+&#\/%=~_|$])/ig
@@ -15,7 +16,7 @@ if (cluster.isMaster) {
     let dbg_limit = 0;
     while (url = site_regexp.exec(contents)) {
       if (dbg_limit++ > 10) break;
-      if (url[0].endsWith('.png') || url[0].endsWith('.jpg') || url[0].endsWith('.js') || url[0].endsWith('.css')) continue;
+      if (url[0].endsWith('.png') || url[0].endsWith('.jpg') || url[0].endsWith('.js') || url[0].endsWith('.css') || RegExp(config.blacklist_urls).test(url)) continue;
       screenshots_pool.push(url[0]);
     };
     screenshots_count = screenshots_pool.length;
