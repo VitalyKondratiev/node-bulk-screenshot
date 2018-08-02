@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const fs = require('fs');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
