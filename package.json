@@ -6,6 +6,9 @@
   "scripts": {
     "page2image": "page2image"
   },
+  "bin": {
+    "node-bulk-screenshot": "./screenshot.js"
+  },
   "author": "Vitaly Kondratiev",
   "license": "MIT",
   "dependencies": {
