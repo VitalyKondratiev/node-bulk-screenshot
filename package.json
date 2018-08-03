@@ -7,8 +7,9 @@
     "page2image": "page2image"
   },
   "bin": {
-    "node-bulk-screenshot": "screenshot.js"
+    "nb-screenshot": "./screenshot.js"
   },
+  "preferGlobal": true,
   "author": "Vitaly Kondratiev",
   "license": "MIT",
   "dependencies": {
