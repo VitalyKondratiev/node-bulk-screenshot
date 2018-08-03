@@ -7,6 +7,12 @@ const execute = require('sync-exec');
 const mkdirp = require('mkdirp');
 const helpers = require('./helpers.js');
 const config = require('./config.json');
+const args = require('args');
+
+args
+  .option('file', 'File with urls list to taking screenshots', 'sitemap.xml');
+ 
+const flags = args.parse(process.argv);
 
 if (cluster.isMaster) {
   let site_regexp = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&#\/%=~_|$?!:,.]*\)|[A-Z0-9+&#\/%=~_|$])/ig
@@ -14,7 +20,7 @@ if (cluster.isMaster) {
   let workers = [];
   let screenshots_count, executed_count = 0;
   helpers.log(`Master ${process.pid} is running`);
-  fs.readFile('sitemap.xml', 'utf8', function (err, contents) {
+  fs.readFile(flags.file, 'utf8', function (err, contents) {
     let dbg_limit = 0;
     while (url = site_regexp.exec(contents)) {
       if (dbg_limit++ > 10) break;
