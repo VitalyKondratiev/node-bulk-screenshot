@@ -28,9 +28,7 @@ if (cluster.isMaster) {
     else {
       helpers.log(`File ${flags.file} loaded`);
     }
-    let dbg_limit = 0;
     while (url = site_regexp.exec(contents)) {
-      if (dbg_limit++ > 10) break;
       if (url[0].endsWith('.png') || url[0].endsWith('.jpg') || url[0].endsWith('.js') || url[0].endsWith('.css') || RegExp(config.blacklist_urls).test(url)) continue;
       screenshots_pool.push(url[0]);
     };
