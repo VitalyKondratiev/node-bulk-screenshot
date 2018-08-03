@@ -21,6 +21,13 @@ if (cluster.isMaster) {
   let screenshots_count, executed_count = 0;
   helpers.log(`Master ${process.pid} is running`);
   fs.readFile(flags.file, 'utf8', function (err, contents) {
+    if (err !== null) {
+      helpers.log(err.toString());
+      process.exit(1);
+    }
+    else {
+      helpers.log(`File ${flags.file} loaded`);
+    }
     let dbg_limit = 0;
     while (url = site_regexp.exec(contents)) {
       if (dbg_limit++ > 10) break;
